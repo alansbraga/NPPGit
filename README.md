@@ -1,0 +1,2 @@
+# NPPGit
+Git with Notepad++

@@ -265,6 +265,11 @@ void showFileLog()
    ExecCommand(TEXT("log"));
 }
 
+void blameFile()
+{
+   ExecCommand(TEXT("blame"));
+}
+
 ////////////////////////////////////////////////////////////////////////////
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -281,6 +286,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 			AddCommand(revertFile,		TEXT("Revert File"),			'R');
 			AddCommand(revertAllFiles,	TEXT("Revert All Open Files"),	0);
 			AddCommand(showFileLog,		TEXT("Show File Log"),			'L');
+			AddCommand(blameFile,		TEXT("Blame File"),			0);
 			break;
 
 		case DLL_THREAD_ATTACH:

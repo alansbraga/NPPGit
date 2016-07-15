@@ -9,7 +9,7 @@ https://forum.lowyat.net/topic/1358320/all
 
 I just needed to add Blame command, so I put the source code here.
 
-## Instalation
+## Installation
 
 First you need to install TortoiseGit, because this plugin simply uses the command line features of TortoiseGit.
 https://tortoisegit.org/

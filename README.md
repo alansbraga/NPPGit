@@ -12,7 +12,9 @@ I just needed to add Blame command, so I put the source code here.
 ## Installation
 
 First you need to install TortoiseGit, because this plugin simply uses the command line features of TortoiseGit.
-https://tortoisegit.org/
+<https://tortoisegit.org/>
+
+Then install [Visual C++ Redistributable for Visual Studio 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48145).
 
 After that, take the DLL NPPGit.dll on the Release folder of this repository and copy to the Notepad\+\+ plugins folder.
 By default located at C:\Program Files (x86)\Notepad++\plugins

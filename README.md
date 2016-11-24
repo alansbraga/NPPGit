@@ -19,4 +19,7 @@ Then install [Visual C++ Redistributable for Visual Studio 2015](https://www.mic
 After that, take the DLL NPPGit.dll on the Release folder of this repository and copy to the Notepad\+\+ plugins folder.
 By default located at C:\Program Files (x86)\Notepad++\plugins
 
+If you are using Notepad\+\+ 64bits version use the dll on folder x64\Release.
+The default folder for 64bits version is C:\Program Files\Notepad++\plugins
+
 Next time you open Notepad\+\+ you can access through menu Plugins->Git

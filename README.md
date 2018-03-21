@@ -23,3 +23,5 @@ If you are using Notepad\+\+ 64bits version use the dll on folder x64\Release.
 The default folder for 64bits version is C:\Program Files\Notepad++\plugins
 
 Next time you open Notepad\+\+ you can access through menu Plugins->Git
+
+![Plugin](Plugin.png?raw=true "Plugin")

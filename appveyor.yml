@@ -1,0 +1,69 @@
+version: 0.1.{Build}
+
+environment:
+  matrix:
+  - PlatformToolset: v141_xp
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+
+  - PlatformToolset: v142
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+
+
+platform:
+    - x64
+    - Win32
+
+configuration:
+    - Release
+    - Debug
+
+install:
+    - if "%platform%"=="x64" set platform_input=x64
+    - if "%platform%"=="Win32" set platform_input=Win32
+    - if "%platform%"=="x64" set archi=amd64
+    - if "%platform%"=="Win32" set archi=x86
+    - if "%PlatformToolset%"=="v141_xp" call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" %archi%
+    - if "%PlatformToolset%"=="v142" call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" %archi%
+
+build_script:
+    - cd "%APPVEYOR_BUILD_FOLDER%"
+    - msbuild NPPGit8.vcxproj /m /p:configuration="%configuration%" /p:platform="%platform_input%" /p:PlatformToolset="%PlatformToolset%" /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+after_build:
+    - cd "%APPVEYOR_BUILD_FOLDER%"
+    - ps: |
+        if($env:PLATFORM_INPUT -eq "x64"){
+            Push-AppveyorArtifact "$env:PLATFORM_INPUT\$env:CONFIGURATION\NPPGit.dll" -FileName NPPGit.dll
+        }
+        if($env:PLATFORM_INPUT -eq "Win32"){
+            Push-AppveyorArtifact "$env:CONFIGURATION\NPPGit.dll" -FileName NPPGit.dll
+        }
+        if ($($env:APPVEYOR_REPO_TAG) -eq "true" -and $env:CONFIGURATION -eq "Release" -and $env:PLATFORMTOOLSET -eq "v141_xp")
+        {
+            if($env:PLATFORM_INPUT -eq "x64"){
+                $ZipFileName = "NPPGit_$($env:APPVEYOR_REPO_TAG_NAME)_x64.zip"
+                7z a $ZipFileName $env:APPVEYOR_BUILD_FOLDER\$env:PLATFORM_INPUT\$env:CONFIGURATION\NPPGit.dll
+            }
+            if($env:PLATFORM_INPUT -eq "Win32"){
+                $ZipFileName = "NPPGit_$($env:APPVEYOR_REPO_TAG_NAME)_x86.zip"
+                7z a $ZipFileName $env:APPVEYOR_BUILD_FOLDER\$env:CONFIGURATION\NPPGit.dll
+            }
+        }
+
+artifacts:
+  - path: NPPGit_*.zip
+    name: releases
+
+deploy:
+    provider: GitHub
+    description: ''
+    auth_token:
+        secure: !!!TODO!!!
+    artifact: releases
+    draft: false
+    prerelease: false
+    force_update: true
+    on:
+        appveyor_repo_tag: true
+        PlatformToolset: v141_xp
+        configuration: Release

@@ -16,11 +16,13 @@ First you need to install TortoiseGit, because this plugin simply uses the comma
 
 Then install [Visual C++ Redistributable for Visual Studio 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48145).
 
+**Important:** New versions of Notepad asks you to create a folder for each plugin
+
 After that, take the DLL NPPGit.dll on the Release folder of this repository and copy to the Notepad\+\+ plugins folder.
-By default located at C:\Program Files (x86)\Notepad++\plugins
+By default located at C:\Program Files (x86)\Notepad++\plugins\NPPGit
 
 If you are using Notepad\+\+ 64bits version use the dll on folder x64\Release.
-The default folder for 64bits version is C:\Program Files\Notepad++\plugins
+The default folder for 64bits version is C:\Program Files\Notepad++\plugins\NPPGit
 
 Next time you open Notepad\+\+ you can access through menu Plugins->Git
 
